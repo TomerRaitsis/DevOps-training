@@ -17,6 +17,7 @@ jobs:
       - checkout
       - run: npm install
       - run: npm rebuild
+      # - run: npm !!!!!!!! run lint !!!!!!!
       - run: npm run test
       - run: curl https://api.render.com/deploy/srv-chcj2dik728tp9ae2p50?key=9Wn84g85-G4
 
