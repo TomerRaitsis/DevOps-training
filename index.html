@@ -48,7 +48,7 @@ input[type="submit"]:hover {
     <title>Document</title>
 </head>
 <body>
-    <form>
+  <script type="module" src="checkFunctions.js"></script>
         <label for="student-name">Student name:</label>
         <input type="text" id="student-name" name="student-name"><br><br>
         <label for="exam-1">Exam 1:</label>
@@ -57,34 +57,44 @@ input[type="submit"]:hover {
         <input type="number" id="exam-2" name="exam-2"><br><br>
         <label for="exam-3">Exam 3:</label>
         <input type="number" id="exam-3" name="exam-3"><br><br>
-        <input type="submit" onclick="writeToFile()" value="שלח">
-      </form>
+        <button onclick="writeToLocalStorage()" >submit</button>
+        <div id="results"></div>
+      <button onclick="showLocalStorage()" >read</button>
 </body>
 </html>
-<script>
 
-  function writeToFile() {
-  var input1 = document.getElementById('student-name').value;
-  var input2 = document.getElementById('exam-1').value;
-  var input3 = document.getElementById('exam-2').value;
-  var input4 = document.getElementById('exam-3').value;
+  <script>
+  import { isValidGrade, isValidName,isKeyUnique } from './checkFunctions.js';
 
-  // Check if file exists
-  window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-  window.requestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
-    fs.root.getFile('data.txt', {create: true}, function(fileEntry) {
-      fileEntry.createWriter(function(fileWriter) {
-        fileWriter.seek(fileWriter.length);
-        var blob = new Blob([input1 + ',' + input2 + ',' + input3 + ',' + input4 + '\n'], {type: 'text/plain'});
-        fileWriter.write(blob);
-        console.log('Data written to file!');
-      }, errorHandler);
-    }, errorHandler);
-  }, errorHandler);
+  function writeToLocalStorage() {
+  var studentName = document.getElementById('student-name').value;
+  var grade1 = document.getElementById('exam-1').value;
+  var grade2 = document.getElementById('exam-2').value;
+  var grade3 = document.getElementById('exam-3').value;
+  if(isValidName(studentName) && isKeyUnique(studentName) && isValidGrade(grade1) && isValidGrade(grade2) && isValidGrade(grade3)){
+  localStorage.setItem(studentName,"Grade 1: "+ grade1+", Grade2: " +grade2+", Grade3: "+grade3);
+  document.getElementById('student-name').value='';
+  document.getElementById('exam-1').value='';
+  document.getElementById('exam-2').value='';
+  document.getElementById('exam-3').value='';
+}
+  else console.log("inputs are invalid");
+  
 }
 
-function errorHandler(error) {
-  console.error('Error writing to file:', error);
+function showLocalStorage() {
+  var localStorageKeys = Object.keys(localStorage);
+  var listItems = "";
+  for (var i = 0; i < localStorageKeys.length; i++) {
+    var key = localStorageKeys[i];
+    var value = localStorage.getItem(key);
+    listItems += "<li>" + key + " - " + value + "</li>";
+  }
+  var list = document.createElement("ul");
+  list.innerHTML = listItems;
+  document.getElementById("results").innerHTML=listItems;
 }
 
-</script>
+
+  </script>
+    
