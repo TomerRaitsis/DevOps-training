@@ -15,11 +15,21 @@ jobs:
     executor: my-exe
     steps:
       - checkout
-      - run: npm install
-      - run: npm rebuild
-      # - run: npm !!!!!!!! run lint !!!!!!!
-      - run: npm run test
-      - run: curl https://api.render.com/deploy/srv-chcj2dik728tp9ae2p50?key=9Wn84g85-G4
+      - run: 
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Rebuild
+          command: npm rebuild
+      - run: 
+          name: Check Linting
+          command: npm run lint
+      - run: 
+          name: Check Tests
+          command:  npm run test
+      - run:
+          name: Upload App
+          command: curl https://api.render.com/deploy/srv-chcj2dik728tp9ae2p50?key=9Wn84g85-G4
 
 workflows:
     my-workflow:
