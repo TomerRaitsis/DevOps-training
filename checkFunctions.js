@@ -14,6 +14,9 @@
  function isKeyUnique(key) {
   return localStorage.getItem(key) === null;
 }
-module.exports.isValidGrade=isValidGrade;
-module.exports.isValidName=isValidName;
-module.exports.isKeyUnique=isKeyUnique;
+
+window.checkFunctions = {
+  isValidGrade: isValidGrade,
+  isValidName: isValidName,
+  isKeyUnique: isKeyUnique
+};

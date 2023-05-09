@@ -48,7 +48,7 @@ input[type="submit"]:hover {
     <title>Document</title>
 </head>
 <body>
-  <script type="module" src="checkFunctions.js"></script>
+  <script type="module" src="../checkFunctions.js"></script>
         <label for="student-name">Student name:</label>
         <input type="text" id="student-name" name="student-name"><br><br>
         <label for="exam-1">Exam 1:</label>
@@ -64,7 +64,7 @@ input[type="submit"]:hover {
 </html>
 
   <script>
-  import { isValidGrade, isValidName,isKeyUnique } from './checkFunctions.js';
+
 
   function writeToLocalStorage() {
   var studentName = document.getElementById('student-name').value;
