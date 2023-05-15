@@ -35,6 +35,6 @@ try {
       window.isKeyUnique = isKeyUnique;
     }
   }
-} catch (e) {
+} catch (e) {{
 
 }

@@ -3,7 +3,7 @@ const checkFunctions = require('../checkFunctions.mjs');
 
 describe('isValidGrade', () => {
   it('returns true for valid grades', () => {
-    expect(checkFunctions.isValidGrade(90)).toBe(false);
+    expect(checkFunctions.isValidGrade(90)).toBe(true);
     expect(checkFunctions.isValidGrade(0)).toBe(true);
     expect(checkFunctions.isValidGrade(100)).toBe(true);
   });
