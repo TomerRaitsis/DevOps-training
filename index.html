@@ -29,7 +29,7 @@
                 background-position: 0% 50%;
             }
         }
-        .box {
+        #box {
             font-family: Arial, sans-serif;
             font-size: 16px;
             width: 400px;
@@ -152,18 +152,18 @@
 
 <body>
   
-  <div class="box">
+  <form id="box">
     <h2>Elad And Tomer's Form</h2>
     <label for="student-name">Student name:</label>
-    <input type="text" id="student-name" name="student-name"><br><br>
+    <input type="text" id="student-name" name="student-name" required><br><br>
     <label for="exam-1">Exam 1:</label>
-    <input type="number" id="exam-1" name="exam-1"><br><br>
+    <input type="number" id="exam-1" name="exam-1" required><br><br>
     <label for="exam-2">Exam 2:</label>
-    <input type="number" id="exam-2" name="exam-2"><br><br>
+    <input type="number" id="exam-2" name="exam-2" required><br><br>
     <label for="exam-3">Exam 3:</label>
-    <input type="number" id="exam-3" name="exam-3"><br><br>
+    <input type="number" id="exam-3" name="exam-3" required><br><br>
     <div class="button-container">
-      <button onclick="writeToLocalStorage()">Submit</button>
+      <button type="submit">Submit</button>
       <button onclick="showLocalStorage()">Show Documents</button>
       <button onclick="clearLocalStorage()">Clear</button>
     </div>
@@ -175,7 +175,7 @@
 
     <div id="results"></div>
 
-  </div>
+  </form>
   <script src="checkFunctions.mjs"></script>
   <script src="formfunctions.js"></script>
 </body>

@@ -1,5 +1,5 @@
 function isValidGrade(grade) {
-  if ( (!grade && grade !=0) || isNaN(grade) || grade < 0 || grade > 100) {
+  if ((!grade && grade !=0) || isNaN(grade) || grade < 0 || grade > 100) {
     return false;
   }
   return true;

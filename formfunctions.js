@@ -1,5 +1,12 @@
 const errorsDiv = document.getElementById('errors');
 const sDiv = document.getElementById('success');
+
+document.getElementById('box').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
+  writeToLocalStorage();
+});
+
+
 function writeToLocalStorage() {
   var studentName = document.getElementById('student-name').value;
   var grade1 = document.getElementById('exam-1').value;
@@ -14,7 +21,7 @@ function writeToLocalStorage() {
     document.getElementById('exam-3').value = '';
     showLocalStorage();
     sDiv.innerHTML = "Document added successfully";
-    errorsDiv.innerHTML = " ";
+    errorsDiv.innerHTML = "";
   }
   else {
     if (errorsDiv) {
@@ -24,7 +31,7 @@ function writeToLocalStorage() {
         - Student name should be unique in the system and contain only letters (A-Z, a-z)<br>
         - Exams should be numbers between 0-100<br>
       `;
-      sDiv.innerHTML = " ";
+      sDiv.innerHTML = "";
     }
 
   }
@@ -41,16 +48,16 @@ function showLocalStorage() {
   var list = document.createElement("ul");
   list.innerHTML = listItems;
   document.getElementById("results").innerHTML = listItems;
-  sDiv.innerHTML = " ";
-  errorsDiv.innerHTML = " ";
+  sDiv.innerHTML = "";
+  errorsDiv.innerHTML = "";
 }
 
 function clearLocalStorage() {
   localStorage.clear();
   document.getElementById("results").innerHTML = "";
   console.log("localStorage cleared");
-  sDiv.innerHTML = " ";
-  errorsDiv.innerHTML = " ";
+  sDiv.innerHTML = "";
+  errorsDiv.innerHTML = "";
 }
 
 window.showLocalStorage = showLocalStorage;
