@@ -6,59 +6,114 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  
   <style>
-    .box {
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      width: 400px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
+    body {
+            background: linear-gradient(45deg, #6b81ff, #385dd8, #3cd8d3, #66c2ff);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s  infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    label {
-      display: inline-block;
-      width: 150px;
-    }
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .box {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #333333;
+            color: #ffffff;
+        }
+        h2 {
+            text-align: center;
+            color: #ffffff;
+        }
 
-    input[type="text"],
-    input[type="number"] {
-      display: inline-block;
-      width: 200px;
-      height: 30px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 5px;
-      margin-bottom: 10px;
-    }
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ffffff;
+        }
 
-    input[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+        input[type="text"],
+        input[type="number"] {
+            
+            width: 200px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 5px;
+            background-color: #555555;
+            color: #ffffff;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    input[type="submit"]:hover {
-      background-color: #3e8e41;
-    }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
 
-    li {
-      padding: 12px 16px;
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-      font-size: 18px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
-    }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
 
+        ul {
+            padding: 0;
+            margin-top: 20px;
+        }
 
-    button {
+        li {
+            list-style-type:none;
+            text-align: center;
+            padding: 12px 16px;
+            background-color: #555555;
+            border: 1px solid #777777;
+            font-size: 17px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+        }
+
+        #errors {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        #success {
+            color: green;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        button {
       margin-bottom: 10px;
       margin-left: auto;
       margin-right: auto;
@@ -92,12 +147,13 @@
     }
   </style>
   <title>Form</title>
-  <script src="./checkFunctions.mjs"></script>
-
+  <script src="formfunctions.mjs" type="module" ></script>
 </head>
 
 <body>
+  
   <div class="box">
+    <h2>Elad And Tomer's Form</h2>
     <label for="student-name">Student name:</label>
     <input type="text" id="student-name" name="student-name"><br><br>
     <label for="exam-1">Exam 1:</label>
@@ -107,8 +163,13 @@
     <label for="exam-3">Exam 3:</label>
     <input type="number" id="exam-3" name="exam-3"><br><br>
     <div class="button-container">
-      <button onclick="writeToLocalStorage()">submit</button>
-      <button onclick="showLocalStorage()">read</button>
+      <button onclick="writeToLocalStorage()">Submit</button>
+      <button onclick="showLocalStorage()">Show Documents</button>
+      <button onclick="clearLocalStorage()">Clear</button>
+    </div>
+    <div id="errors">
+    </div>
+    <div id="success">
     </div>
 
 
@@ -119,33 +180,3 @@
 
 </html>
 
-
-<script>
-  function writeToLocalStorage() {
-    var studentName = document.getElementById('student-name').value;
-    var grade1 = document.getElementById('exam-1').value;
-    var grade2 = document.getElementById('exam-2').value;
-    var grade3 = document.getElementById('exam-3').value;
-    if (isValidName(studentName) && isKeyUnique(studentName) && isValidGrade(grade1) && isValidGrade(grade2) && isValidGrade(grade3)) {
-      localStorage.setItem(studentName, "Grade 1: " + grade1 + ", Grade2: " + grade2 + ", Grade3: " + grade3);
-      document.getElementById('student-name').value = '';
-      document.getElementById('exam-1').value = '';
-      document.getElementById('exam-2').value = '';
-      document.getElementById('exam-3').value = '';
-    }
-    else console.log("inputs are invalid");
-  }
-
-  function showLocalStorage() {
-    var localStorageKeys = Object.keys(localStorage);
-    var listItems = "";
-    for (var i = 0; i < localStorageKeys.length; i++) {
-      var key = localStorageKeys[i];
-      var value = localStorage.getItem(key);
-      listItems += "<li>" + key + " - " + value + "</li>";
-    }
-    var list = document.createElement("ul");
-    list.innerHTML = listItems;
-    document.getElementById("results").innerHTML = listItems;
-  }
-</script>
