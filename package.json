@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --detectOpenHandles",
     "start": "index.html",
-    "lint": "eslint *.mjs --color"
+    "lint": "eslint *.{mjs,js} --color"
   },
   "author": "Tomer",
   "license": "ISC",
